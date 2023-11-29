@@ -2,6 +2,7 @@ from django.db import models
 from modulos.inventario.models import Producto
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from modulos.acceso.models import Empleado
 
 
 class Item(models.Model):
@@ -23,7 +24,6 @@ class Item(models.Model):
     class Meta:
         db_table = 'item_menu'
 
-
 class Menu(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, editable=False)
     fecha_edicion = models.DateTimeField(auto_now=True)
@@ -33,7 +33,6 @@ class Menu(models.Model):
     class Meta:
         db_table = 'menu'
 
-
 class Preparacion(models.Model):
     cantidad_requerida = models.IntegerField(blank=False, null=False, default=1)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
@@ -42,3 +41,24 @@ class Preparacion(models.Model):
     fecha_edicion = models.DateTimeField(auto_now=True)
     class Meta:
         db_table = 'preparacion_item_menu'
+
+class Venta(models.Model):
+    referencia_venta = models.CharField(max_length=50, unique=True)
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, editable=False)
+    fecha_edicion = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'ventas'
+
+class DetalleVenta(models.Model):
+    venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Item, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    descripcion = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True, editable=False)
+    fecha_edicion = models.DateTimeField(auto_now=True)
+    class Meta:
+        db_table = 'detalles_ventas'
+

@@ -36,10 +36,15 @@ class Producto (models.Model):
 class CompraProductos(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True, editable=False)
     fecha_edicion = models.DateTimeField(auto_now=True)
+    referencia_compra = models.CharField(max_length=50, unique=True, default='CI-')
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
-    producto = models.ManyToManyField(Producto)
-    cantidad = models.IntegerField(blank=False, null=False, default=1)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
     
     class Meta:
         db_table = 'compras_productos'
+
+class DetalleCompra(models.Model):
+    compra_inventario = models.ForeignKey(CompraProductos, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    descripcion = models.TextField()

@@ -48,7 +48,6 @@ def consultar_productos(request):
                 if jd:
                     consulta = ProductoConsultaSerializer(data=jd)
                     if not consulta.is_valid() :
-                        print(consulta.errors)
                         if consulta.data['proveedor']:
                             proveedor = Proveedor.objects.get(id=consulta.data['proveedor'])
                             consulta = Producto.objects.filter(proveedor=proveedor)

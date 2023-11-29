@@ -1,0 +1,38 @@
+
+<div class="container w-100">
+    <div class="row">
+        <div class="w-50">
+            <img src="../static/img/detalle_producto.png" style="width: 100%; height: 600px;" >
+            <div class="row w-100 mx-5">
+                <img src="../static/img/detalle_producto_1.png" style="width: 40%;" class="mx-4 mt-4">
+                <img src="../static/img/detalle_producto_1.png" style="width: 40%;" class="mx-4 mt-4">
+            </div>
+        </div>
+        <div class="w-50">
+            <table class="table table-borderless">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fs-5">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <br><br><br>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <br>
+                            <br>
+                            Proveedor: <a href="../detalle_proveedor/" class="text-danger">Angela White</a>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-danger btn-lg w-100 mx-5">ORDENAR</button>
+        </div>
+    </div>
+</div>
+<div class="fs-1 text-danger text-center mt-5">
+    <b>Otros Productos Disponibles</b>
+</div>
+{% block detalle_proveedor %}
+    {{ detalle_proveedor | safe }}
+{% endblock %}
