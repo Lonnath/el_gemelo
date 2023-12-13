@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
-from modulos.inventario.models import Producto
+from modulos.productos.models import Producto
 from .models import *
 
 class ItemSerializer(serializers.Serializer):

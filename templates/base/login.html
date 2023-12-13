@@ -1,0 +1,33 @@
+<div class="container">
+    <form id="{{ url_peticion | safe }}">
+        <div class="row">
+            <div class="col">
+                <label for='{{ campo_1 }}' class="form-label">{{campo_1_texto}}</label>
+                <input type="{{ campo_1_tipo }}" class="form-control" id="{{ campo_1 }}" name="{{ campo_1 }}">
+            </div>
+            <div class="col">
+                <label for='{{ campo_2 }}' class="form-label">{{campo_2_texto}}</label>
+                <input type="{{ campo_2_tipo }}" class="form-control" id="{{ campo_2 }}" name="{{ campo_2 }}">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-danger m-4" value="{{ boton_texto }}" />    
+            </div>
+            {% if url_peticion == 'recovery_password' %}
+                <div class="col">
+                    <button type="button" class="btn btn-danger m-4" id="cancelar">CANCELAR</button>   
+                </div>
+            {% endif %}
+        </div>
+        {% if url_peticion == 'acceso' %}
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <a href="recovery_password_vista/">Recuperar Contraseña</a>
+                </div>
+            </div>
+        {% endif %}
+        
+    </form>
+</div>

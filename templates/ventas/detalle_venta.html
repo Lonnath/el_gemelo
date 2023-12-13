@@ -1,0 +1,82 @@
+<div class="container w-100">
+    <div class="container">
+        <div class="fs-1 text-danger text-center mt-5">
+            <b>Detalle</b>
+        </div>
+        <table class="table table-borderless">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="w-50">
+                        <p>
+                            <b>Referencia Venta:</b> {{ venta.referencia_venta }} 
+                        </p>         
+                    </td>
+                    <td class="w-50">
+                        <p>
+                            <b>Valor Total:</b> {{ venta.valor_total }} 
+                        </p>         
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50">
+                        <p>
+                            <b>Dinero Ingresado:</b> {{ venta.dinero_ingresado }} 
+                        </p>         
+                    </td>
+                    <td class="w-50">
+                        <p>
+                            <b>Dinero Devuelto:</b> {{ dinero_devuelto }} 
+                        </p>         
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="fs-1 text-danger text-center mt-5">
+            <b>Productos Adquiridos</b>
+        </div>
+        <div class="w-100">
+            <table class="table table-borderless">
+                <thead>
+                </thead>
+                <tbody>
+                    {% for fila in movimientos %}
+                        <tr>
+                            {% for elemento in fila %}
+                                <td class="w-50">
+                                    
+                                    <div class="row">
+                                        <a href="../../../productos/detalle_producto/{{ usuario }}/{{ elemento.producto.id }}" class="text-dark text-decoration-none">
+                                            <div class="card shadow ml-5 bg-body rounded">
+                                                <div class="row">
+                                                    <div class="card-body w-50">
+                                                        <h5 class="card-title mx-4">{{ elemento.producto.nombre }}</h5>
+                                                        <p class="card-text mx-4">{{ elemento.producto.descripcion }}</p>
+                                                        <div class="mx-4"><b>Desde ${{ elemento.producto.precio }}</b></div>
+                                                    </div>
+                                                    <div class="w-50">
+                                                        <img src="/static/img/productos.png" class="w-75 m-4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        
+                                    </div>
+                                </td>
+                                {% if tamanio_data == 1 %}
+                                    <td>
+
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

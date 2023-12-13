@@ -1,0 +1,25 @@
+<div class="container">
+    <form id="{{ url_peticion | safe }}">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label for='{{ campo_1 }}' class="form-label">{{campo_1_texto}}</label>
+                    <input type="{{ campo_1_tipo }}" class="form-control" id="{{ campo_1 }}" name="{{ campo_1 }}">
+                </div>
+                <div class="col">
+                    <label for='{{ campo_2 }}' class="form-label">{{campo_2_texto}}</label>
+                    <input type="{{ campo_2_tipo }}" class="form-control" id="{{ campo_2 }}" name="{{ campo_2 }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row ">
+            <div class="col-4">
+
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-danger mt-4 w-50" value="{{ boton_texto }}" /> 
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+    <form id="{{ url_peticion | safe }}">
+        <div class="row">
+            <div class="col">
+                <label for='{{ campo_1 }}' class="form-label">{{campo_1_texto}}</label>
+                <input type="{{ campo_1_tipo }}" class="form-control" id="{{ campo_1 }}" name="{{ campo_1 }}">
+            </div>
+            <div class="col">
+                <label for='{{ campo_2 }}' class="form-label">{{campo_2_texto}}</label>
+                <input type="{{ campo_2_tipo }}" class="form-control" id="{{ campo_2 }}" name="{{ campo_2 }}">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-danger m-4" value="{{ boton_texto }}" />    
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for='{{ campo_3 }}' class="form-label">{{campo_3_texto}}</label>
+                <textarea class="form-control" rows="3" id="{{ campo_3 }}" name="{{ campo_3 }}"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for='{{ campo_4 }}' class="form-label">{{campo_4_texto}}</label>
+                <div class="row">
+                    $<input type="{{ campo_4_tipo }}" class="form-control w-75" id="{{ campo_4 }}" name="{{ campo_4 }}">
+                </div>
+            </div>
+            <div class="col">
+                <label for='{{ campo_5 }}' class="form-label">{{campo_5_texto}}</label>
+                <input type="{{ campo_5_tipo }}" class="form-control w-75" id="{{ campo_5 }}" name="{{ campo_5 }}">
+            </div>
+            <div class="col">
+                <label for='{{ campo_6 }}' class="form-label">{{campo_6_texto}}</label>
+                <input type="{{ campo_6_tipo }}" class="form-control w-75" id="{{ campo_6 }}" name="{{ campo_6 }}" min="1" max="5">
+                Max. 5 minutos.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for='{{ campo_7 }}' class="form-label">{{campo_7_texto}}</label>
+                <div class="row">
+                    $<input type="{{ campo_7_tipo }}" class="form-control w-75" id="{{ campo_7 }}" name="{{ campo_7 }}">
+                </div>
+            </div>
+            <div class="col">
+                <label for='{{ campo_8 }}' class="form-label">{{campo_8_texto}}</label>
+                <br>
+                <input type="{{ campo_8_tipo }}" class="form-check-input" id="{{ campo_8 }}" name="{{ campo_8 }}">
+            </div>
+        </div>
+    </form>
+</div>

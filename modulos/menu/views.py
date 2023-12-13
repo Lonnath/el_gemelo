@@ -8,7 +8,31 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
+from django.shortcuts import render
 import json
+from django.contrib.auth.models import User
+
+def menu(request, usuario):
+    
+    banner_title = "Menu"
+    banner_subtitle = "Nuestro Menu"
+    banner_texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna."
+    banner_subtexto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna."
+    banner = render(request, 'base/banner.html', {
+        'banner_title': banner_title, 
+        'banner_subtitle': banner_subtitle, 
+        'banner_texto': banner_texto, 
+        'banner_subtexto': banner_subtexto
+    })
+    validacion = User.objects.get(id=usuario)
+    if validacion.is_superuser:
+        menu = render(request, 'base/menu_admin.html')
+    else:
+        menu = render(request, 'base/menu_user.html')
+    content = render(request, 'menu_content.html')
+    return render(request, 'base/base.html', {'menu': menu.content.decode('utf-8'), 'banner': banner.content.decode('utf-8'), 'content': content.content.decode('utf-8')})
+
+
 @csrf_exempt
 @api_view(['POST'])
 def crear_item(request):

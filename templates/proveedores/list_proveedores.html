@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="m-4 w-25 fs-5">
+            <b>Proveedor</b>
+            <input class="form-control w-100 mx-4" type="text" placeholder="proveedor">
+        
+        </div>
+        <div class="row w-50 m-5">
+            <button type="button" class="btn btn-danger w-25">></button>
+            <a href="../../crear_proveedor_vista/{{usuario}}" class="w-25"><button type="button" class="btn btn-danger w-100 mx-5">Añadir</button></a>
+        </div>
+    </div>
+    {% for elemento in proveedores %}
+        <a class="text-dark text-decoration-none" id="detalle_proveedor" href="../../detalle_proveedor/{{ usuario }}/{{ elemento.id }}/">
+            <div class="card w-100 shadow my-4 p-3 ml-5 bg-body rounded" style="width: 18rem;">
+                <div class="row">
+                    <div class="card-body w-75">
+                        <h5 class="card-title mx-4">{{ elemento.nombre }}</h5>
+                        <p class="card-text mx-4">Número de Telefono Movil: {{ elemento.numero_telefono }}, Dirección: {{ elemento.direccion }}, Ciudad: {{ elemento.ciudad }}</p>
+                    </div>
+                    <div class="w-25 my-3">
+                        <img src="/static/img/persona_3.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>

@@ -47,11 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # MODULOS
     'modulos.acceso',
-    'modulos.inventario',
+    'modulos.productos',
     'modulos.menu',
     'modulos.proveedores',
     'modulos.restaurante',
-    'modulos.vistas',
+    'modulos.usuarios',
     'django_extensions',
 ]
 

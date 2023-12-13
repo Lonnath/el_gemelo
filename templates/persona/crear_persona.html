@@ -1,0 +1,88 @@
+
+<div class="row mx-5">
+    {% autoescape on %}
+        {% block lista_editar %}
+            {{ lista_editar | safe }}
+        {% endblock %}
+    {% endautoescape %}
+    <div class="w-75">
+        <form id="{{ url_guardar | safe }}">
+            <div class="fs-1 border-bottom w-100 my-5">
+                <b>
+                    INFORMACION {{ tipo_informacion }}
+                </b>
+            </div>
+            <div class="mb-3 w-50">
+                <label for="nombre" class="form-label fs-4"><b>Nombre Completo*</b></label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="">
+            </div>
+            {% autoescape on %}
+                {% block campos %}
+                    {{ campos | safe }}
+                {% endblock %}
+            {% endautoescape %}
+            <div class="mb-3 w-50">
+                
+                <label for="activo" class="form-label fs-4"><b>Activo</b></label> 
+                <br>
+                <input class="form-check-input" type="checkbox" checked id="activo" name="activo">
+            </div>
+            <div class="fs-1 border-bottom w-100 my-5">
+                <b>
+                    CONTACTO
+                </b>
+            </div>
+            <table class="table table-borderless">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label fs-4"><b>Correo</b></label>
+                                    <input type="email" class="form-control" id="correo" name='correo' placeholder="" value="">
+                                </div>
+                                <div class="mb-3">
+                                    
+                                    <label for="codigo_postal" class="form-label fs-4"><b>Codigo Postal</b></label> 
+                                    <br>
+                                    <input type="text" class="form-control" id="codigo_postal" name='codigo_postal' placeholder="" value="">
+                                </div>
+                                <div class="mb-3">
+                                    
+                                    <label for="direccion" class="form-label fs-4"><b>Dirección</b></label> 
+                                    <br>
+                                    <input type="text" class="form-control" id="direccion" name='direccion' placeholder="" value="">
+                                </div>                    
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="numero_telefono" class="form-label fs-4"><b>Número de Contacto</b></label>
+                                    <input type="text" class="form-control" id="numero_telefono" name='numero_telefono' placeholder="" value="">
+                                </div>
+                                <div class="mb-3">
+                                    
+                                    <label for="pais" class="form-label fs-4"><b>Pais</b></label> 
+                                    <br>
+                                    <input type="text" class="form-control" id="pais" name="pais" placeholder="" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ciudad" class="form-label fs-4"><b>Ciudad</b></label> 
+                                    <br>
+                                    <input type="text" class="form-control" id="ciudad" name='ciudad' placeholder="" value="">
+                                    
+                                </div>    
+                                <div class="my-5 text-end">
+                                    <button type="submit" class="btn btn-danger w-25">GUARDAR</button>
+                                </div>                   
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

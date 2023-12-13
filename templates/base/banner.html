@@ -1,0 +1,32 @@
+{% load static %}
+<img src="" class="img-fluid w-100" >
+<div class="card" style="width: 100%; border: 0px !important;">
+    <div class="card text-white">
+        <img src="{% static 'img/banner.png' %}">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center mt-4">{% block banner_title %}
+                {{ banner_title | safe }}
+            {% endblock %}</h5>
+            <p class="card-text text-center mt-5">{% block banner_texto %}
+                {{ banner_texto | safe }}
+            {% endblock %}</p>
+        
+        </div>
+    </div>  
+    <div class="container px-5">
+        <div class="card-body px-5 mx-5">
+            <h5 class="card-title">
+                <div class="text-center">
+                    {% block banner_subtitle %}
+                        {{ banner_subtitle | safe }}
+                    {% endblock %}
+                </div>
+            </h5>
+            <div class="card-text text-center">
+                {% block banner_subtexto %}
+                    {{ banner_subtexto | safe }}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+  </div>

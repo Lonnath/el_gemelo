@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="container w-100">
+        <div class="row">
+            <div class="w-50">
+                <img src="{% block url_img %}
+                    {{ url_img | safe }}
+                {% endblock %}" style="width: 100%; height: 600px;" >
+            </div>
+            <div class="w-50">
+                <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <br>
+                                <div>
+                                    Numero de Contacto: {{ persona.numero_telefono }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Coreeo: {{ persona.correo }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Pais: {{ persona.pais }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Codigo Postal: {{ persona.codigo_postal }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Ciudad: {{ persona.ciudad }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Dirección: {{ persona.direccion }}                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <br>
+                                <div>
+                                    Activo: {% if persona.activo %}
+                                        Si
+                                    {% else %}
+                                        No
+                                    {% endif %}    
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="{% block url_editar %}
+                {{ url_editar | safe }}
+            {% endblock %}">
+                    <button type="button" class="btn btn-danger">EDITAR</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    {% block detalle_proveedor %}
+        {{ detalle_proveedor | safe }}
+    {% endblock %}
+
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+
+    <div class="row">
+        <div class="w-25 mx-5 my-3 fs-5">
+            <b>Compra</b>
+            <input class="form-control w-100 mx-4" type="text" placeholder="Referencia" aria-label="default input example">
+        
+        </div>
+        <div class="row w-50 my-5">
+            <a href="" class="w-25"><button type="button" class="btn btn-danger w-100">></button></a>
+            <a href="{{url_compra}}" class="w-25"><button type="button" class="btn btn-danger w-100">Añadir</button></a>
+        </div>
+    </div>
+
+
+    <div class="container w-100">
+        <div class="row">
+            <table class="table table-borderless">
+                <thead>
+                </thead>
+                <tbody>
+                    {% for elemento in movimientos %}
+                        <tr>
+                            <td  style="border-bottom: 2px dashed #CC3333 !important;">
+                                <div class="text-danger fs-3 ">  
+                                    {{ elemento.referencia_compra }} - {{ elemento.producto.nombre }}
+                                </div>
+                                {{ elemento.producto.descripcion }}
+                            </td>
+                            <td>
+                                <br>
+                                <div class="mt-3 text-danger">
+                                    ${{ elemento.valor_total }}
+                                </div>
+                            </td>
+                            <td>
+                                <br>
+                                
+                                <button type="button" class="btn btn-danger w-25">X</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>

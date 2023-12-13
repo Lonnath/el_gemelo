@@ -1,0 +1,63 @@
+<div class="container">
+     
+    <div class="row">
+        <div class="w-25 fs-5">
+            <b>Producto</b>
+            <input class="form-control w-100 mx-4" type="text" placeholder="Producto" aria-label="default input example">
+        
+        </div>
+        <div class="w-25 mx-2 fs-5">
+            <b>Proveedor</b>
+            <input class="form-control w-100" type="text" placeholder="Proveedor" aria-label="default input example" >
+        </div>
+        <div class="row w-50 mt-4">
+            <a href="" class="col"><button type="button" class="btn btn-danger w-100">></button></a>
+            <a href="../../crear_producto_vista/{{usuario}}" class="col"><button type="button" class="btn btn-danger w-100 mx-5">Añadir</button></a>
+        </div>
+    </div>
+
+    <div class="container w-100">
+        <div class="row">
+            <div class="w-100">
+                <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        {% for fila in productos %}
+                            <tr>
+                                {% for elemento in fila %}
+                                    <td class="w-50">
+                                        
+                                        <div class="row">
+                                            <a href="../../detalle_producto/{{ usuario }}/{{ elemento.id }}" class="text-dark text-decoration-none">
+                                                <div class="card shadow ml-5 bg-body rounded">
+                                                    <div class="row">
+                                                        <div class="card-body w-50">
+                                                            <h5 class="card-title mx-4">{{ elemento.nombre }}</h5>
+                                                            <p class="card-text mx-4">{{ elemento.descripcion }}</p>
+                                                            <div class="mx-4"><b>Desde ${{ elemento.precio }}</b></div>
+                                                        </div>
+                                                        <div class="w-50">
+                                                            <img src="/static/img/productos.png" class="w-75 m-4">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </td>
+                                    {% if tamanio_data == 1 %}
+                                        <td>
+
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

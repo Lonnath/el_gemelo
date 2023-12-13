@@ -8,6 +8,110 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 import json
+
+from django.contrib.auth.models import User
+from modulos.proveedores.models import Proveedor
+
+def proveedores(request, usuario):
+    banner_title = "Proveedores"
+    banner_texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna."
+    #banner_subtitle = "Nuestro Menu"
+    #banner_subtexto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna."
+    banner = render(request, 'base/banner.html', {
+        'banner_title': banner_title, 
+        'banner_texto': banner_texto, 
+        #'banner_subtitle': banner_subtitle, 
+        #'banner_subtexto': banner_subtexto
+    })
+    validacion = User.objects.get(id=usuario)
+    if validacion.is_superuser:
+        menu = render(request, 'base/menu_admin.html')
+    else:
+        menu = render(request, 'base/menu_user.html')
+    proveedores = Proveedor.objects.all()
+    proveedores_serializados = ProveedorSerializer(proveedores, many=True)
+    content = render(request, 'proveedores/list_proveedores.html', {'proveedores': proveedores_serializados.data, 'usuario': usuario})
+    return render(request, 'base/base.html', {'menu': menu.content.decode('utf-8'), 'banner': banner.content.decode('utf-8'), 'content': content.content.decode('utf-8')})
+
+
+
+def detalle_proveedor(request, proveedor, usuario):
+    
+    validacion = User.objects.get(id=usuario)
+    if validacion.is_superuser:
+        menu = render(request, 'base/menu_admin.html')
+    else:
+        menu = render(request, 'base/menu_user.html')
+
+    proveedor_info = Proveedor.objects.get(id=proveedor)
+    url_detalle_vendedor = '../static/img/detalle_persona.png'
+    url_editar = f'../../../editar_proveedor_vista/{usuario}/{proveedor}'
+    banner_title = proveedor_info.nombre
+    #banner_texto = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna."
+    banner = render(request, 'base/banner.html', {
+        'banner_title': banner_title, 
+        #'banner_texto': banner_texto, 
+    })
+    detalle_proveedor = render(request, 'proveedores/detalle_proveedor.html')
+    content = render(request, 'persona/detalle_persona.html', {
+        'url_img': url_detalle_vendedor,
+        'url_editar': url_editar,
+        'detalle_proveedor': detalle_proveedor.content.decode('utf-8'),
+        'usuario': usuario,
+        'persona': proveedor_info,
+    })
+    return render(request, 'base/base.html', {
+        'menu': menu.content.decode('utf-8'), 
+        'banner': banner.content.decode('utf-8'), 
+        'content': content.content.decode('utf-8')
+    })
+
+
+def editar_proveedor_vista(request, usuario, proveedor):
+    
+    usuario = User.objects.get(id=usuario)
+    if usuario.is_superuser:
+        menu = render(request, 'base/menu_admin.html')
+    else:
+        menu = render(request, 'base/menu_user.html')
+    proveedor_info = Proveedor.objects.get(id=proveedor)
+    url_guardar = 'actualizar_proveedor'
+    banner_title = "Proveedor"
+    banner = render(request, 'base/banner.html', {
+        'banner_title': banner_title,
+    })
+    lista_editar = render(request, 'proveedores/editar_proveedor.html')
+    content = render(request, 'persona/editar_persona.html', {
+        'url_guardar': url_guardar,
+        'lista_editar': lista_editar.content.decode('utf-8'),
+        'campos': '',
+        'persona': proveedor_info,
+        'tipo_informacion': 'PROVEEDOR'
+    })
+    return render(request, 'base/base.html', {'menu': menu.content.decode('utf-8'), 'banner': banner.content.decode('utf-8'), 'content': content.content.decode('utf-8')})
+
+
+def crear_proveedor_vista(request, usuario):
+    
+    usuario = User.objects.get(id=usuario)
+    if usuario.is_superuser:
+        menu = render(request, 'base/menu_admin.html')
+    else:
+        menu = render(request, 'base/menu_user.html')
+    url_guardar = 'crear_proveedor'
+    banner_title = "Proveedor"
+    banner = render(request, 'base/banner.html', {
+        'banner_title': banner_title,
+    })
+    lista_editar = render(request, 'proveedores/crear_proveedor.html')
+    content = render(request, 'persona/crear_persona.html', {
+        'url_guardar': url_guardar,
+        'lista_editar': lista_editar.content.decode('utf-8'),
+        'campos': '',
+        'tipo_informacion': 'PROVEEDOR'
+    })
+    return render(request, 'base/base.html', {'menu': menu.content.decode('utf-8'), 'banner': banner.content.decode('utf-8'), 'content': content.content.decode('utf-8')})
+
 @csrf_exempt
 @api_view(['POST'])
 def crear_proveedor(request):
@@ -24,6 +128,7 @@ def crear_proveedor(request):
                         if 'correo' in proveedor.errors:
                             raise ValidationError('Este correo ya se encuentra registrado, por favor verifique la información suministrada.')
                         else:
+                            print(proveedor.errors)
                             raise ValidationError('Información invalida, verifique los datos.')
             except ValidationError as e:
                 return Response({'CODE': 2, "MESSAGE": 'Error.', "DATA": str(e.detail[0])})
@@ -92,10 +197,10 @@ def consultar_proveedor_editar(request):
         return Response({'CODE': 500, "MESSAGE": 'ERROR DE METODO', "DATA":''}, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
-@api_view(['PUT'])
+@api_view(['POST'])
 def editar_proveedor(request):
     try:
-        if request.method == 'PUT':
+        if request.method == 'POST':
             try:
                 jd = json.loads(request.body)
                 if jd:
@@ -112,6 +217,7 @@ def editar_proveedor(request):
                         proveedor_actualizar.save()
                         return Response({'CODE': 1, "MESSAGE": 'Ok.', "DATA": 'Actualizacion de Proveedor Satisfactoria.'})
                     else:
+                        print(proveedor.errors)
                         raise ValidationError('Información invalida, verifique los datos.')
             except Proveedor.DoesNotExist as e:
                 return Response({'CODE': 2, "MESSAGE": 'Error.', "DATA": 'No se encontraron Proveedores'})
